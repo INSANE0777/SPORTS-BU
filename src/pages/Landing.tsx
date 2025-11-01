@@ -54,6 +54,11 @@ const Landing = () => {
                       Enter as House
                     </Button>
                   </Link>
+                  <Link to="/broadcast">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg px-8 py-6 hover:bg-foreground hover:text-background transition-colors duration-300">
+                      Watch Broadcast
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="relative hidden lg:flex items-center justify-center h-[500px]">
