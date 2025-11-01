@@ -14,7 +14,7 @@ import Landing from "./pages/Landing";
 import Admin from "./pages/Admin";
 import HouseView from "./pages/HouseView";
 import BroadcastView from "./pages/BroadcastView";
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 
