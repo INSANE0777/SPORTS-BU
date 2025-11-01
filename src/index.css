@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Auction Theme - Premium Colors */
+    --ink: 0 0% 16%; /* #282828 - Primary dark */
+    --paper: 40 58% 96%; /* #F9F6EF - Background */
+    --cobalt: 227 71% 35%; /* #193497 - Accent */
+    --pink-eraser: 8 73% 76%; /* #EDA398 - Highlight */
+    
+    /* Semantic tokens */
+    --background: 40 58% 96%;
+    --foreground: 0 0% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 16%;
+
+    --primary: 227 71% 35%;
+    --primary-foreground: 40 58% 96%;
+
+    --secondary: 8 73% 76%;
+    --secondary-foreground: 0 0% 16%;
+
+    --muted: 40 20% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 227 71% 35%;
+    --accent-foreground: 40 58% 96%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 40 58% 96%;
+
+    --border: 40 30% 85%;
+    --input: 40 30% 85%;
+    --ring: 227 71% 35%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(227 71% 35%), hsl(227 71% 45%));
+    --gradient-secondary: linear-gradient(135deg, hsl(8 73% 76%), hsl(8 73% 86%));
+    --gradient-hero: linear-gradient(180deg, hsl(40 58% 96%), hsl(40 40% 92%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsla(227 71% 35% / 0.1);
+    --shadow-medium: 0 8px 30px hsla(227 71% 35% / 0.15);
+    --shadow-strong: 0 12px 40px hsla(227 71% 35% / 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  
+  html.lenis {
+    height: auto;
+  }
+  
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .glass-effect {
+    background: hsla(0 0% 100% / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsla(0 0% 100% / 0.3);
+  }
+  
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  /* Elite Player Animations */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(250, 204, 21, 0.5), 0 0 60px rgba(250, 204, 21, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(250, 204, 21, 0.8), 0 0 80px rgba(250, 204, 21, 0.4);
+    }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  @keyframes bounce-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-bounce-in {
+    animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-in;
+  }
+  
+  /* Advanced UI Enhancements */
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(25, 52, 151, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(25, 52, 151, 0.5);
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scale-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite linear;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+  
+  /* Advanced Shadows */
+  .shadow-depth-1 {
+    box-shadow: 0 2px 8px hsla(0 0% 0% / 0.08), 0 1px 3px hsla(0 0% 0% / 0.1);
+  }
+  
+  .shadow-depth-2 {
+    box-shadow: 0 4px 16px hsla(0 0% 0% / 0.1), 0 2px 6px hsla(0 0% 0% / 0.12);
+  }
+  
+  .shadow-depth-3 {
+    box-shadow: 0 8px 24px hsla(0 0% 0% / 0.12), 0 4px 8px hsla(0 0% 0% / 0.15);
+  }
+  
+  .shadow-depth-4 {
+    box-shadow: 0 16px 32px hsla(0 0% 0% / 0.15), 0 8px 16px hsla(0 0% 0% / 0.18);
+  }
+  
+  /* Advanced Hover Effects */
+  .hover-lift-advanced {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift-advanced:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 32px hsla(0 0% 0% / 0.15);
+  }
+  
+  /* Glass Morphism */
+  .glass-morphism {
+    background: hsla(0 0% 100% / 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid hsla(0 0% 100% / 0.3);
+  }
+  
+  /* Number Counter Animation */
+  @keyframes number-pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .number-pop {
+    animation: number-pop 0.3s ease-out;
+  }
+}

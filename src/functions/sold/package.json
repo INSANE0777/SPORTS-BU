@@ -1,0 +1,15 @@
+{
+  "name": "sold-player-function",
+  "version": "1.0.0",
+  "description": "Appwrite function to mark player as sold and deduct house balance",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
