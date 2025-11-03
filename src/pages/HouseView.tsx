@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Wallet, Star, PartyPopper } from "lucide-react";
 import { HouseDocument } from "@/types/appwrite";
+import { normalizePlayerPhoto } from "@/utils/playerPhotos";
 
 const HouseView: React.FC = () => {
   const { houseId } = useParams<{ houseId: string }>();
@@ -175,7 +176,7 @@ const HouseView: React.FC = () => {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <img src={player.photo} alt={player.name} className="w-12 h-12 rounded-xl object-cover shadow-depth-1 transition-transform duration-300 hover:scale-110"/>
+                        <img src={normalizePlayerPhoto(player.name, player.photo)} alt={player.name} className="w-12 h-12 rounded-xl object-cover shadow-depth-1 transition-transform duration-300 hover:scale-110"/>
                         <div>
                           <h4 className="font-bold text-foreground text-sm leading-tight">{player.name}</h4>
                           <p className="text-xs text-muted-foreground">{player.sport}</p>

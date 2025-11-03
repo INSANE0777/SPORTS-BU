@@ -7,10 +7,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Pause, SkipForward, Gavel, RotateCcw } from "lucide-react";
+import { Play, Pause, SkipForward, Gavel, RotateCcw, List, Search, Star } from "lucide-react";
 import { toast } from "sonner";
 import { HouseDocument } from '@/types/appwrite';
 import { AppwriteException } from 'appwrite';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Admin: React.FC = () => {
   const { players, houses, auctionState, isLoading } = useAuctionRealtime();
@@ -18,8 +26,10 @@ const Admin: React.FC = () => {
   const [manualBidAmount, setManualBidAmount] = useState("");
   const [selectedHouseForBid, setSelectedHouseForBid] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showPlayerList, setShowPlayerList] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Function to schedule elite players after every 6-7 normal players
+  // Function to schedule elite players evenly distributed throughout the auction
   const schedulePlayers = useMemo(() => {
     const normalPlayers = players.filter(p => !p.isSold && p.rating < 9);
     const elitePlayers = players.filter(p => !p.isSold && p.rating >= 9);
@@ -27,32 +37,38 @@ const Admin: React.FC = () => {
     const scheduled: typeof players = [];
     let normalIndex = 0;
     let eliteIndex = 0;
-    let batchNumber = 0;
     
-    // Pattern: 7 normal, elite, 6 normal, elite, 7 normal, elite, etc.
+    // Distribute elite players throughout with dynamic spacing
     while (normalIndex < normalPlayers.length || eliteIndex < elitePlayers.length) {
-      // Determine batch size: alternate between 7 and 6
-      const normalBatchSize = batchNumber % 2 === 0 ? 7 : 6;
+      // Calculate how many normal players to add before the next elite
+      // Adjust spacing as we go to keep elite players distributed
+      const remainingElitePlayers = elitePlayers.length - eliteIndex;
+      const remainingNormalPlayers = normalPlayers.length - normalIndex;
       
-      // Add batch of normal players
-      for (let i = 0; i < normalBatchSize && normalIndex < normalPlayers.length; i++) {
-        scheduled.push(normalPlayers[normalIndex]);
-        normalIndex++;
-      }
-      
-      // Add 1 elite player after the batch (if available)
-      if (eliteIndex < elitePlayers.length) {
+      if (remainingElitePlayers > 0 && remainingNormalPlayers > 0) {
+        // Calculate dynamic batch size to evenly space remaining elite players
+        const dynamicBatchSize = Math.floor(remainingNormalPlayers / remainingElitePlayers);
+        
+        // Add batch of normal players
+        for (let i = 0; i < dynamicBatchSize && normalIndex < normalPlayers.length; i++) {
+          scheduled.push(normalPlayers[normalIndex]);
+          normalIndex++;
+        }
+        
+        // Add 1 elite player
         scheduled.push(elitePlayers[eliteIndex]);
         eliteIndex++;
-      }
-      
-      batchNumber++;
-      
-      // If no more elite players, add remaining normal players at the end
-      if (eliteIndex >= elitePlayers.length && normalIndex < normalPlayers.length) {
+      } else if (remainingNormalPlayers > 0) {
+        // No more elite players, add all remaining normal players
         while (normalIndex < normalPlayers.length) {
           scheduled.push(normalPlayers[normalIndex]);
           normalIndex++;
+        }
+      } else if (remainingElitePlayers > 0) {
+        // No more normal players, add all remaining elite players
+        while (eliteIndex < elitePlayers.length) {
+          scheduled.push(elitePlayers[eliteIndex]);
+          eliteIndex++;
         }
       }
     }
@@ -64,6 +80,16 @@ const Admin: React.FC = () => {
   const winningHouse = houses.find(h => h.$id === auctionState?.winningHouseId);
   const unsoldPlayers = schedulePlayers; // Use scheduled order instead of filtered
   const currentUnsoldIndex = unsoldPlayers.findIndex(p => p.$id === currentPlayer?.$id);
+  
+  // Filter players for search in dialog
+  const filteredPlayers = useMemo(() => {
+    if (!searchQuery.trim()) return unsoldPlayers;
+    const query = searchQuery.toLowerCase();
+    return unsoldPlayers.filter(p => 
+      p.name.toLowerCase().includes(query) || 
+      p.uniqueId.toLowerCase().includes(query)
+    );
+  }, [unsoldPlayers, searchQuery]);
 
   const handleResetAuction = async () => {
     if (!confirm("Are you sure you want to reset the auction? This will reset the auction state.")) return;
@@ -226,6 +252,40 @@ const Admin: React.FC = () => {
     setSelectedHouseForBid(""); // Clear the selection
   };
 
+  const handleSkipToPlayer = async (playerId: string) => {
+    if (isProcessing) return;
+    
+    const targetPlayer = unsoldPlayers.find(p => p.$id === playerId);
+    if (!targetPlayer) {
+      toast.error("Player not found");
+      return;
+    }
+    
+    setIsProcessing(true);
+    try {
+      await databases.updateDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.auctionStateTableId,
+        appwriteConfig.auctionStateDocId,
+        {
+          currentPlayerId: targetPlayer.$id,
+          currentBid: targetPlayer.basePrice,
+          winningHouseId: "",
+          isAuctionActive: false,
+          statusMessage: "Jumped",
+        }
+      );
+      toast.success(`Jumped to ${targetPlayer.name}`);
+      setShowPlayerList(false);
+      setSearchQuery("");
+    } catch (error) {
+      console.error("Failed to skip to player:", error);
+      toast.error("Failed to jump to player");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   const handleSoldPlayer = async () => {
     if (!auctionState?.winningHouseId || !currentPlayer || isProcessing) return;
     setIsProcessing(true);
@@ -358,6 +418,73 @@ const Admin: React.FC = () => {
             >
               <RotateCcw className="w-5 h-5" /> Reset Auction
             </Button>
+            <Dialog open={showPlayerList} onOpenChange={setShowPlayerList}>
+              <DialogTrigger asChild>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="gap-2 shadow-depth-1 hover:shadow-depth-2 transition-all duration-300 hover:scale-105 border-2"
+                >
+                  <List className="w-5 h-5" /> Player List
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-black">Jump to Player</DialogTitle>
+                  <DialogDescription>
+                    Search and skip directly to any player in the auction
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="relative mb-4">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search by name or ID..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+                <div className="flex-1 overflow-y-auto pr-2 space-y-2">
+                  {filteredPlayers.length === 0 ? (
+                    <Card className="p-8 text-center">
+                      <p className="text-muted-foreground">No players found</p>
+                    </Card>
+                  ) : (
+                    filteredPlayers.map((player, index) => (
+                      <Card
+                        key={player.$id}
+                        className={`p-4 cursor-pointer transition-all duration-200 hover:shadow-depth-2 hover-lift-advanced ${
+                          player.$id === currentPlayer?.$id ? 'bg-primary/10 border-2 border-primary' : ''
+                        }`}
+                        onClick={() => handleSkipToPlayer(player.$id)}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h4 className="font-bold text-lg">{player.name}</h4>
+                              {player.rating >= 9 && (
+                                <Badge className="bg-yellow-500 text-black">
+                                  <Star className="w-3 h-3 mr-1 fill-black" />
+                                  ELITE
+                                </Badge>
+                              )}
+                            </div>
+                            <p className="text-sm text-muted-foreground font-mono">{player.uniqueId}</p>
+                            <div className="flex items-center gap-2 mt-2">
+                              <Badge variant="secondary" className="text-xs">{player.sport}</Badge>
+                              <Badge variant="outline" className="text-xs">₹{player.basePrice.toLocaleString()}</Badge>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-xs text-muted-foreground font-semibold">#{index + 1}</p>
+                          </div>
+                        </div>
+                      </Card>
+                    ))
+                  )}
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </Card>
         <div className="grid lg:grid-cols-3 gap-8">

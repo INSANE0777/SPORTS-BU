@@ -5,6 +5,7 @@ import { Gavel } from "lucide-react";
 import  PlayerCard  from '@/components/PlayerCard';
 import { HouseDocument, PlayerDocument } from '@/types/appwrite';
 import Confetti from 'react-confetti';
+import { normalizePlayerPhoto } from '@/utils/playerPhotos';
 
 const BroadcastView: React.FC = () => {
   const { players, houses, auctionState, isLoading } = useAuctionRealtime();
@@ -276,9 +277,10 @@ const BroadcastView: React.FC = () => {
                   }}
                 ></div>
                 <img 
-                  src={soldPlayerData.player.photo} 
+                  src={normalizePlayerPhoto(soldPlayerData.player.name, soldPlayerData.player.photo)} 
                   alt={soldPlayerData.player.name} 
                   className="w-full h-80 object-cover transition-transform duration-1000 hover:scale-105" 
+                  style={{ objectPosition: 'center 35%' }}
                 />
                 
                 {/* Player info overlay on image */}

@@ -1,0 +1,112 @@
+PLAYER PHOTO MAPPINGS
+================================================================================
+
+MATCHED PLAYERS:
+--------------------------------------------------------------------------------
+Aryan Jaiswal (None) -> /Aryan Jaiswal.jpg
+Krish Mishra (None) -> /Krish Mishra.jpg
+Dhruv Prajapati (None) -> /Dhruv Prajapati.jpeg
+Shubham Mishra (None) -> /Shubham Mishra.jpg
+Aarsh Kamboj (None) -> /Aarsh Kamboj.jpg
+Gaurav Tiwari (None) -> /Gaurav Tiwari.jpg
+Ankur Singh Chauhan (None) -> /Ankur Singh Chauhan.jpg
+Ishaan Sharma (None) -> /Ishaan Sharma.png
+Harshit Singh Chauhan (None) -> /Harshit Singh Chauhan.jpg
+Sundaram Sinha (None) -> /Sundaram Sinha.jpg
+Prashansa Chauhan (None) -> /Prashansa Chauhan.pdf
+Adhya Gupta (None) -> /Adhya Gupta.jpg
+Suraj (None) -> /Suraj.jpg
+Daksh (None) -> /Daksh.jpg
+Anshul (None) -> /Anshul.jpg
+Bhumik (None) -> /Bhumika Garg.jpg
+Vasu (None) -> /Vasu.jpg
+Kush (None) -> /Kush Narwal.jpg
+Bhanu Pratap (None) -> /Bhanu Pratap.JPG
+Vansh Sehrawat (None) -> /Vansh Sehrawat.jpeg
+Vineet (None) -> /Vineet.jpg
+Ashutosh (None) -> /Ashutosh.jpg
+Aditya Rai (None) -> /Aditya Rai.jpg
+Aditya Mittal (None) -> /Aditya Mittal.jpg
+Mayank Sah (None) -> /Mayank Sah.jpg
+Nikunj Panwar (None) -> /Nikunj Panwar.jpg
+Rudra Pratap (None) -> /Rudra Pratap.jpg
+Yatharth Tyagi (None) -> /Yatharth Tyagi.HEIC
+Kunal (None) -> /Kunal.jpg
+Harsh Chandel (None) -> /Harsh Chandel.jpg
+Surya Pratap Singh Rathod (None) -> /Surya Pratap Singh Rathod.jpg
+Aditya kumar (None) -> /Aditya kumar.jpg
+Kunsh kakkar (None) -> /KUNSH.jpg
+Dhruv agarwal (None) -> /Dhruv agarwal.jpg
+Ryann singh (None) -> /Ryann singh.jpg
+Sarman raj (None) -> /Sarman raj.jpg
+Lakshay kumar (None) -> /Lakshay kumar.jpg
+Prarthana Rana (None) -> /Prarthana Rana.jpg
+Stuti Agarwal (None) -> /Stuti Agarwal.jpg
+Neeyati Shukla (None) -> /Neeyati Shukla.jpg
+Divyanshi (None) -> /Divyanshi.jpg
+Angil (None) -> /Angil.jpg
+Tanvi Singhla (None) -> /Tanvi Singh.jpg
+Palakpreet Kaur (None) -> /Palakpreet Kaur.jpg
+Vandita Goel (None) -> /Vandita Goel.jpg
+Lavanya (None) -> /Lavanya.jpg
+Ashima (None) -> /Ashima.jpg
+Rashi  Rajput (None) -> /Rashi  Rajput.jpg
+Uddhav Parihar (None) -> /Uddhav Parihar.jpg
+Aman Singh (None) -> /Aman Singh.jpg
+Ananya Barath (None) -> /Ananya Barath.jpg
+Kashvi Garg (None) -> /Kashvi Garg.jpg
+Saumya Sharma (None) -> /Saumya Sharma.jpg
+Myra tyagi (None) -> /Myra tyagi.jpg
+Sanvi ahuja (None) -> /Sanvi ahuja.jpg
+Mishika daver (None) -> /Mishika daver.HEIC
+Mahek advani (None) -> /Mahek advani.jpg
+Nishit Nama (None) -> /Nishit Nama.jpg
+Harshit Agarwal (None) -> /Harshit Agarwal.jpg
+Navya Loshali (None) -> /Navya Loshali.jpg
+Agrima Jain (None) -> /Agrima Jain.jpg
+Tanvi Singh (None) -> /Tanvi Singh.jpg
+Aarya giri (None) -> /Aarya giri.jpg
+Nehum Baid (None) -> /Nehum Baid.heif
+Sriraam Rajendran (None) -> /Sriraam Rajendran.jpg
+Nakul Kansal (None) -> /Nakul Kansal.HEIC
+Aditya Kumar (None) -> /Aditya kumar.jpg
+Ryann Singh (None) -> /Ryann singh.jpg
+Dhruv Agarwal (None) -> /Dhruv agarwal.jpg
+Sudarshan Yadav (None) -> /Sudarshan Yadav.jpg
+Akash Sharma (None) -> /Akash Sharma.jpg
+Dhruv (None) -> /Dhruv agarwal.jpg
+Pranay Wadhwa (None) -> /Pranay Wadhwa.jpg
+Lavish Solanki (None) -> /Lavish Solanki.jpg
+Aditya Kumar (None) -> /Aditya kumar.jpg
+Navam Upadhyay (None) -> /Navam Upadhyay.jpg
+Krish Jhinkwan (None) -> /Krish Jhinkwan.jpg
+Ananya Saxena (None) -> /Ananya Saxena.jpg
+Bhumika Garg (None) -> /Bhumika Garg.jpg
+Anmol Upadhyay(vc) (None) -> /Anmol Upadhyay(vc).jpeg
+Ridhi Garg (None) -> /Ridhi Garg.jpeg
+Sania Tyagi (None) -> /Sania Tyagi.jpeg
+Anushka Singh (None) -> /Anushka Singh.png
+Aakarshi Nigam (None) -> /Aakarshi Nigam.jpeg
+anubhav (None) -> /anubhav.HEIC
+jatin solanki (None) -> /jatin solanki.jpg
+vansh mathur (None) -> /vansh mathur.jpg
+chirag jain (None) -> /chirag jain.jpg
+nimish jain (None) -> /nimish jain.jpg
+Sehej Joshi (None) -> /Sehej Joshi.HEIC
+Aditya Siwach (None) -> /Aditya Siwach.jpg
+
+
+UNMATCHED PLAYERS:
+--------------------------------------------------------------------------------
+Dev soni (Row 61)
+Harshit dhaundiyal (Row 62)
+Ashmit Punia (Row 63)
+Abhinav Baisoya (Row 76)
+Akshat Khandelwal (Row 77)
+Soham Aich (Row 78)
+Priyanshu Chauhan (Row 79)
+Rudraksh Chaudhary (Row 80)
+Shourya (Row 81)
+shivansh (Row 97)
+Utkarsh raj (Row 103)
+Karthek G (Row 104)

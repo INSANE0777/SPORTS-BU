@@ -1,6 +1,7 @@
 import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Star, Trophy } from "lucide-react";
+import { normalizePlayerPhoto } from "@/utils/playerPhotos";
 
 interface PlayerDisplayData {
   name: string;
@@ -20,6 +21,9 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
 
   // Check if player is elite (rating 9+)
   const isElitePlayer = player.rating >= 9;
+  
+  // Get the normalized photo URL (local if available)
+  const photoUrl = normalizePlayerPhoto(player.name, player.photo);
 
   return (
     <div className="relative pt-8">
@@ -45,7 +49,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
             <div className="absolute inset-0 bg-yellow-400/10 pointer-events-none z-10"></div>
           )}
           
-          <img src={player.photo} alt={player.name} className="w-full h-80 object-cover transition-transform duration-500 hover:scale-105" />
+          <img src={photoUrl} alt={player.name} className="w-full h-80 object-cover object-center transition-transform duration-500 hover:scale-105" style={{ objectPosition: 'center 35%' }} />
           
           <div className="absolute top-3 right-3 z-10">
             <Badge className={`flex items-center gap-1 text-md backdrop-blur-sm border-none transition-all duration-300 ${
