@@ -71,7 +71,7 @@ const Landing = () => {
               </div>
             </div>
           </section>
-          <section className="houses-section py-24 px-6 bg-ink/50 relative">
+          <section className="houses-section py-24 px-6 bg-paper relative z-20">
             <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4 house-card">The Elite Houses</h2>
