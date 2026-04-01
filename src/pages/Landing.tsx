@@ -16,21 +16,7 @@ const Landing = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero section: animate on page load
       gsap.from(".hero-element", { opacity: 0, y: 50, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.5 });
-
-      // Houses section: animate when scrolled into view
-      gsap.from(".house-card", {
-        opacity: 0,
-        y: 60,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".houses-section",
-          start: "top 80%",
-        },
-      });
     }, mainRef);
     return () => ctx.revert();
   }, []);
