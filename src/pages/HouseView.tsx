@@ -4,7 +4,7 @@ import { useAuctionRealtime } from "@/hooks/useAuctionRealtime";
 import  PlayerCard  from "@/components/PlayerCard";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+
 import { Wallet, Star, PartyPopper } from "lucide-react";
 import { HouseDocument } from "@/types/appwrite";
 import { normalizePlayerPhoto } from "@/utils/playerPhotos";
@@ -27,10 +27,13 @@ const HouseView: React.FC = () => {
       .filter(p => !p.isSold && p.$id !== currentPlayer.$id)
       .sort((a, b) => b.rating - a.rating)
       .slice(0, 3);
-  }, [
-    // Corrected dependency array only includes `players`
-    players 
-  ]);
+  }, [players, currentPlayer]);
+
+  const squad = useMemo(() => {
+    return players
+      .filter(p => p.isSold && p.houseId === houseId)
+      .sort((a, b) => (b.sellingPrice || 0) - (a.sellingPrice || 0));
+  }, [players, houseId]);
 
   useEffect(() => {
     if (
@@ -84,7 +87,13 @@ const HouseView: React.FC = () => {
           </div>
           <div className="inline-block text-center">
             <div className="flex justify-center items-center gap-4">
-               <div className="w-16 h-16 rounded-xl flex items-center justify-center text-3xl font-bold shadow-depth-2 transition-all duration-300 hover:scale-110" style={{ backgroundColor: `${house.color}20`, color: house.color }}>{house.name.charAt(0)}</div>
+                <div className="w-32 h-32 flex-shrink-0 rounded-2xl flex items-center justify-center shadow-depth-3 transition-all duration-300 hover:scale-105" style={{ backgroundColor: `${house.color}15` }}>
+                  {house.logo ? (
+                    <img src={house.logo} alt={house.name} className="w-full h-full object-contain p-1 drop-shadow-xl" />
+                  ) : (
+                    <span className="text-4xl font-bold" style={{ color: house.color }}>{house.name.charAt(0)}</span>
+                  )}
+                </div>
               <h1 className="text-5xl md:text-6xl font-black text-foreground tracking-tight">{house.name}</h1>
             </div>
             <p className="text-lg text-muted-foreground mt-2 font-medium">Live Auction View</p>
@@ -151,7 +160,13 @@ const HouseView: React.FC = () => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-md font-bold shadow-depth-1 transition-all duration-300 hover:scale-110" style={{ backgroundColor: `${h.color}20`, color: h.color }}>{h.name.charAt(0)}</div>
+                      <div className="w-20 h-20 flex-shrink-0 rounded-2xl flex items-center justify-center shadow-depth-1 transition-all duration-300 hover:scale-105" style={{ backgroundColor: `${h.color}15` }}>
+                        {h.logo ? (
+                          <img src={h.logo} alt={h.name} className="w-full h-full object-contain p-0.5" />
+                        ) : (
+                          <span className="text-xl font-bold" style={{ color: h.color }}>{h.name.charAt(0)}</span>
+                        )}
+                      </div>
                       <div>
                         <h3 className="font-semibold text-foreground text-sm leading-tight">{h.name}</h3>
                         <p className="text-xs text-muted-foreground font-mono">₹{h.balance.toLocaleString()}</p>
@@ -192,6 +207,62 @@ const HouseView: React.FC = () => {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Squad Section */}
+        <div className="mt-16 space-y-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-extrabold text-foreground">Your Squad</h2>
+            <Badge variant="outline" className="text-lg py-1 px-4 border-2 font-bold bg-primary/10 text-primary border-primary/30">
+              {squad.length} Player{squad.length !== 1 ? 's' : ''}
+            </Badge>
+          </div>
+          
+          {squad.length === 0 ? (
+            <Card className="p-12 bg-paper/50 rounded-3xl border-dashed border-2 border-border/50 text-center">
+              <PartyPopper className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-muted-foreground mb-2">No players yet</h3>
+              <p className="text-muted-foreground/70">Win auctions to start building your dream team!</p>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {squad.map((player, index) => (
+                <Card 
+                  key={player.$id} 
+                  className="p-5 bg-paper rounded-2xl shadow-depth-1 border-border/50 transition-all duration-300 hover:border-primary/50 hover:shadow-depth-3 hover-lift-advanced animate-scale-in"
+                  style={{ animationDelay: `${(index % 8) * 50}ms` }}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <img 
+                      src={normalizePlayerPhoto(player.name, player.photo)} 
+                      alt={player.name} 
+                      className="w-16 h-16 rounded-xl object-cover shadow-depth-1 ring-2 ring-background border border-border/30"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-foreground text-lg truncate leading-tight">{player.name}</h4>
+                      <p className="text-sm text-muted-foreground font-medium truncate">{player.course}</p>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="bg-background rounded-xl p-2.5 text-center shadow-inner">
+                      <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Price</p>
+                      <p className="font-black text-primary text-sm">₹{(player.sellingPrice || 0).toLocaleString()}</p>
+                    </div>
+                    <div className="bg-background rounded-xl p-2.5 text-center shadow-inner">
+                      <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Sport</p>
+                      <p className="font-bold text-foreground text-sm truncate">{player.sport}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-bold text-muted-foreground px-1">
+                    <span className="flex items-center gap-1"><Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" /> {player.rating}</span>
+                    <span className="truncate max-w-[100px] text-right" title={player.specialSkills?.join(', ') || ''}>
+                      {player.specialSkills?.length ? player.specialSkills[0] : 'Standard'}
+                    </span>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -256,7 +327,11 @@ const HouseView: React.FC = () => {
                       boxShadow: `0 0 30px ${house.color}50`
                     }}
                   >
-                    {house.name.charAt(0)}
+                    {house.logo ? (
+                      <img src={house.logo} alt={house.name} className="w-full h-full object-contain p-2" />
+                    ) : (
+                      house.name.charAt(0)
+                    )}
                   </div>
                   <h2 className="text-6xl font-black tracking-tight" style={{ color: house.color }}>
                     {house.name}

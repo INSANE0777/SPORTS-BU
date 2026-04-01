@@ -43,13 +43,13 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
           ? 'border-4 border-yellow-400 shadow-[0_0_30px_rgba(250,204,21,0.5)] animate-pulse-glow' 
           : 'border border-border hover-lift-advanced'
       }`}>
-        <div className="relative">
+        <div className="relative bg-neutral-100/50">
           {/* Golden overlay for elite players */}
           {isElitePlayer && (
             <div className="absolute inset-0 bg-yellow-400/10 pointer-events-none z-10"></div>
           )}
           
-          <img src={photoUrl} alt={player.name} className="w-full h-80 object-cover object-center transition-transform duration-500 hover:scale-105" style={{ objectPosition: 'center 35%' }} />
+          <img src={photoUrl} alt={player.name} className="w-full h-80 py-2 object-contain object-center transition-transform duration-500 hover:scale-[1.03]" />
           
           <div className="absolute top-3 right-3 z-10">
             <Badge className={`flex items-center gap-1 text-md backdrop-blur-sm border-none transition-all duration-300 ${

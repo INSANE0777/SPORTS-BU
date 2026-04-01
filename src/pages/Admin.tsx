@@ -521,10 +521,14 @@ const Admin: React.FC = () => {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-4">
                         <div 
-                          className="w-14 h-14 rounded-xl flex items-center justify-center text-xl font-bold shadow-depth-1 transition-all duration-300 hover:scale-110" 
-                          style={{ backgroundColor: `${house.color}20`, color: house.color }}
+                          className="w-24 h-24 rounded-2xl flex items-center justify-center shadow-depth-2 transition-all duration-300 hover:scale-105" 
+                          style={{ backgroundColor: `${house.color}15` }}
                         >
-                          {house.name.charAt(0)}
+                          {house.logo ? (
+                            <img src={house.logo} alt={house.name} className="w-full h-full object-contain scale-[1.15] drop-shadow-md" />
+                          ) : (
+                            <span className="text-2xl font-bold" style={{ color: house.color }}>{house.name.charAt(0)}</span>
+                          )}
                         </div>
                         <div>
                           <h3 className="font-bold text-foreground text-lg leading-tight">{house.name}</h3>

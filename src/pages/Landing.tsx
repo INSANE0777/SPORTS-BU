@@ -71,6 +71,37 @@ const Landing = () => {
               </div>
             </div>
           </section>
+          <section className="py-24 px-6 bg-ink/50 relative">
+            <div className="container mx-auto">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4 hero-element">The Elite Houses</h2>
+                <p className="text-muted-foreground text-xl max-w-2xl mx-auto hero-element">Four legendary factions competing for dominance in the ultimate sports arena.</p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  { name: "KEEN KICKERS", img: "/pic3.png", color: "#4ADE80", desc: "Honesty, honor, and loyalty. Above all we uphold our honour and our word like the Samurai." },
+                  { name: "MIGHTY BOLTZ", img: "/pic1.png", color: "#A78BFA", desc: "Strength and power are our foundation. The relentless force of nature, striking with the power of lightning." },
+                  { name: "SUPER SPADES", img: "/pic2.png", color: "#22D3EE", desc: "Precision and calculation. We are defined by our wisdom and our dragon-like focus." },
+                  { name: "HEROIC HEARTS", img: "/pic4.png", color: "#F87171", desc: "Passion and courage drive our spirit. We fight with pure heart and the rising fire of the phoenix." }
+                ].map((house, i) => (
+                  <div key={house.name} className="hero-element group relative bg-paper rounded-3xl p-8 shadow-depth-2 hover:shadow-depth-3 transition-all duration-500 hover:-translate-y-2 border border-border/50 overflow-hidden">
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500" 
+                      style={{ background: `radial-gradient(circle at center, ${house.color}, transparent 70%)` }}
+                    ></div>
+                    <div className="relative z-10 flex flex-col items-center text-center">
+                      <div className="w-40 h-40 mb-6 rounded-2xl bg-ink p-4 shadow-depth-2 group-hover:scale-110 transition-transform duration-500">
+                        <img src={house.img} alt={house.name} className="w-full h-full object-contain scale-[1.25] drop-shadow-lg" />
+                      </div>
+                      <h3 className="text-2xl font-black mb-2 tracking-tight" style={{ color: house.color }}>{house.name}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{house.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
         </main>
 
        

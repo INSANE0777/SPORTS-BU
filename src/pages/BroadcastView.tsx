@@ -196,7 +196,7 @@ const BroadcastView: React.FC = () => {
         </div>
       </main>
 
-      <footer className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 z-10 mt-8">
+      <footer className="w-full grid grid-cols-2 md:grid-cols-4 gap-6 z-10 mt-12 pb-12">
         {houses.map((h: HouseDocument, index: number) => (
           <Card 
             key={h.$id} 
@@ -209,15 +209,22 @@ const BroadcastView: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <div 
-                className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold transition-all duration-300 ${
-                  auctionState.winningHouseId === h.$id ? 'bg-primary-foreground/20' : ''
+                className={`w-20 h-20 flex-shrink-0 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-depth-1 ${
+                  auctionState.winningHouseId === h.$id ? 'scale-110 shadow-depth-3 border-2 border-white/30' : ''
                 }`}
                 style={{ 
-                  backgroundColor: auctionState.winningHouseId === h.$id ? 'rgba(255,255,255,0.2)' : `${h.color}20`, 
-                  color: h.color 
+                  backgroundColor: auctionState.winningHouseId === h.$id ? 'rgba(255,255,255,0.2)' : `${h.color}15`, 
                 }}
               >
-                {h.name.charAt(0)}
+                {h.logo ? (
+                  <img 
+                    src={h.logo} 
+                    alt={h.name} 
+                    className="w-full h-full object-contain p-0.5"
+                  />
+                ) : (
+                  <span className="text-xl font-bold" style={{ color: h.color }}>{h.name.charAt(0)}</span>
+                )}
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="font-bold text-sm leading-tight truncate">{h.name}</h4>
@@ -270,18 +277,19 @@ const BroadcastView: React.FC = () => {
             
               {/* Player image with overlay - moved to top */}
               <div className="relative overflow-hidden">
-                <div 
-                  className="absolute inset-0 z-10 pointer-events-none opacity-15"
-                  style={{
-                    backgroundColor: soldPlayerData.house.color
-                  }}
-                ></div>
-                <img 
-                  src={normalizePlayerPhoto(soldPlayerData.player.name, soldPlayerData.player.photo)} 
-                  alt={soldPlayerData.player.name} 
-                  className="w-full h-80 object-cover transition-transform duration-1000 hover:scale-105" 
-                  style={{ objectPosition: 'center 35%' }}
-                />
+                <div className="relative bg-neutral-100/50">
+                  <div 
+                    className="absolute inset-0 z-10 pointer-events-none opacity-15"
+                    style={{
+                      backgroundColor: soldPlayerData.house.color
+                    }}
+                  ></div>
+                  <img 
+                    src={normalizePlayerPhoto(soldPlayerData.player.name, soldPlayerData.player.photo)} 
+                    alt={soldPlayerData.player.name} 
+                    className="w-full h-80 py-2 object-contain transition-transform duration-1000 hover:scale-[1.03]" 
+                  />
+                </div>
                 
                 {/* Player info overlay on image */}
                 <div className="absolute bottom-0 left-0 right-0 p-5 bg-ink/90">
