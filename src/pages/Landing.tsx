@@ -16,7 +16,21 @@ const Landing = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Hero section: animate on page load
       gsap.from(".hero-element", { opacity: 0, y: 50, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.5 });
+
+      // Houses section: animate when scrolled into view
+      gsap.from(".house-card", {
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".houses-section",
+          start: "top 80%",
+        },
+      });
     }, mainRef);
     return () => ctx.revert();
   }, []);
@@ -71,11 +85,11 @@ const Landing = () => {
               </div>
             </div>
           </section>
-          <section className="py-24 px-6 bg-ink/50 relative">
+          <section className="houses-section py-24 px-6 bg-ink/50 relative">
             <div className="container mx-auto">
               <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4 hero-element">The Elite Houses</h2>
-                <p className="text-muted-foreground text-xl max-w-2xl mx-auto hero-element">Four legendary factions competing for dominance in the ultimate sports arena.</p>
+                <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4 house-card">The Elite Houses</h2>
+                <p className="text-muted-foreground text-xl max-w-2xl mx-auto house-card">Four legendary factions competing for dominance in the ultimate sports arena.</p>
               </div>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -85,7 +99,7 @@ const Landing = () => {
                   { name: "SUPER SPADES", img: "/pic2.png", color: "#22D3EE", desc: "Precision and calculation. We are defined by our wisdom and our dragon-like focus." },
                   { name: "HEROIC HEARTS", img: "/pic4.png", color: "#F87171", desc: "Passion and courage drive our spirit. We fight with pure heart and the rising fire of the phoenix." }
                 ].map((house, i) => (
-                  <div key={house.name} className="hero-element group relative bg-paper rounded-3xl p-8 shadow-depth-2 hover:shadow-depth-3 transition-all duration-500 hover:-translate-y-2 border border-border/50 overflow-hidden">
+                  <div key={house.name} className="house-card group relative bg-paper rounded-3xl p-8 shadow-depth-2 hover:shadow-depth-3 transition-all duration-500 hover:-translate-y-2 border border-border/50 overflow-hidden">
                     <div 
                       className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500" 
                       style={{ background: `radial-gradient(circle at center, ${house.color}, transparent 70%)` }}
