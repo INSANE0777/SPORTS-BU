@@ -2,7 +2,7 @@
 // Maps player name (as stored in DB) → image path in /public
 const PLAYER_PHOTOS: Record<string, string> = {
   // Athletics girls
-  "Myra Tyagi": "/Myra tyagi.jpg",
+  "Myra Tyagi": "/Myra new.jpeg",
   "Prashansa Chauhan": "/Prashansa Chauhan.png",
 
   // Badminton boys
@@ -20,7 +20,7 @@ const PLAYER_PHOTOS: Record<string, string> = {
   // Basketball girls
 // Basketball girls (FIXED)
 "Anushka singh": "/Anushka Singh.jpeg",
-"aakarshi nigam": "/Aakarshi Nigam.jpeg",
+"aakarshi nigam": "/Aakarshi new.jpeg",
 "Pragya Saraswat": "/Pragya Saraswat.jpeg",
 "Kanan Sehrawat": "/Kanan Sehrawat.jpeg", // FIXED spelling
 "Vanshika Dhaka": "/Vanshika Dhaka.jpeg",
