@@ -17,10 +17,15 @@ const PLAYER_PHOTOS: Record<string, string> = {
   "Neharika": "/Neharika.jpg",
 
   // Basketball girls
-  "Anushka singh": "/Anushka Singh.png",
-  "aakarshi nigam": "/Aakarshi Nigam.jpeg",
-  // pragya saraswat, kanan seherawat, vanshika dhaka, meenal, pallavi — images not yet provided
-
+  // Basketball girls
+// Basketball girls (FIXED)
+"Anushka singh": "/Anushka Singh.jpeg",
+"aakarshi nigam": "/Aakarshi Nigam.jpeg",
+"Pragya Saraswat": "/Pragya Saraswat.jpeg",
+"Kanan Sehrawat": "/Kanan Sehrawat.jpeg", // FIXED spelling
+"Vanshika Dhaka": "/Vanshika Dhaka.jpeg",
+"Meenal Singh": "/Meenal Singh.jpeg", // FIXED full name
+  
   // Chess
   "Harshit Singh Chauhan": "/Harshit Singh Chauhan.jpg",
 

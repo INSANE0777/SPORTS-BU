@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Phoenix Titans",
+    "color": "#FF6B35",
+    "balance": 48000,
+    "logo": "🔥",
+    "$id": "68ffa7a4001ae9e266f9",
+    "$sequence": "1",
+    "$createdAt": "2025-10-27T17:11:01.097+00:00",
+    "$updatedAt": "2026-02-03T15:37:14.552+00:00",
+    "$permissions": [],
+    "$databaseId": "68fc96c0000e08dcfce2",
+    "$collectionId": "houses"
+  },
+  {
+    "name": "Thunder Warriors",
+    "color": "#004E89",
+    "balance": 46450,
+    "logo": "⚡",
+    "$id": "68ffa94f000e9e21cd92",
+    "$sequence": "2",
+    "$createdAt": "2025-10-27T17:18:07.952+00:00",
+    "$updatedAt": "2026-02-20T10:57:10.040+00:00",
+    "$permissions": [],
+    "$databaseId": "68fc96c0000e08dcfce2",
+    "$collectionId": "houses"
+  },
+  {
+    "name": "Fire House",
+    "color": "#FF4500",
+    "balance": 45300,
+    "logo": "🔥",
+    "$id": "690652a27beff6535c29",
+    "$sequence": "3",
+    "$createdAt": "2025-11-01T18:34:10.515+00:00",
+    "$updatedAt": "2026-02-03T12:39:46.988+00:00",
+    "$permissions": [],
+    "$databaseId": "68fc96c0000e08dcfce2",
+    "$collectionId": "houses"
+  },
+  {
+    "name": "Water House",
+    "color": "#1E90FF",
+    "balance": 42450,
+    "logo": "⚡",
+    "$id": "690652a27bf6fa83727f",
+    "$sequence": "4",
+    "$createdAt": "2025-11-01T18:34:10.515+00:00",
+    "$updatedAt": "2025-11-04T08:57:24.064+00:00",
+    "$permissions": [],
+    "$databaseId": "68fc96c0000e08dcfce2",
+    "$collectionId": "houses"
+  },
+  {
+    "name": "Earth House",
+    "color": "#228B22",
+    "balance": 50000,
+    "logo": "🔥",
+    "$id": "690652a27bf879c425f8",
+    "$sequence": "5",
+    "$createdAt": "2025-11-01T18:34:10.515+00:00",
+    "$updatedAt": "2025-11-01T22:54:34.516+00:00",
+    "$permissions": [],
+    "$databaseId": "68fc96c0000e08dcfce2",
+    "$collectionId": "houses"
+  },
+  {
+    "name": "Air House",
+    "color": "#DCDCDC",
+    "balance": 45000,
+    "logo": "⚡",
+    "$id": "690652a27bf9fdd212a2",
+    "$sequence": "6",
+    "$createdAt": "2025-11-01T18:34:10.515+00:00",
+    "$updatedAt": "2025-11-03T19:05:44.270+00:00",
+    "$permissions": [],
+    "$databaseId": "68fc96c0000e08dcfce2",
+    "$collectionId": "houses"
+  }
+]

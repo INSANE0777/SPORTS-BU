@@ -1,0 +1,54 @@
+[
+  {
+    "key": "name",
+    "type": "string",
+    "status": "available",
+    "error": "",
+    "required": true,
+    "array": false,
+    "$createdAt": "2025-10-25T09:37:14.768+00:00",
+    "$updatedAt": "2025-10-25T09:37:14.946+00:00",
+    "size": 100,
+    "default": null,
+    "encrypt": false
+  },
+  {
+    "key": "color",
+    "type": "string",
+    "status": "available",
+    "error": "",
+    "required": true,
+    "array": false,
+    "$createdAt": "2025-10-25T09:37:26.062+00:00",
+    "$updatedAt": "2025-10-25T09:37:26.243+00:00",
+    "size": 100,
+    "default": null,
+    "encrypt": false
+  },
+  {
+    "key": "balance",
+    "type": "integer",
+    "status": "available",
+    "error": "",
+    "required": true,
+    "array": false,
+    "$createdAt": "2025-10-25T09:37:45.821+00:00",
+    "$updatedAt": "2025-10-27T17:10:14.731+00:00",
+    "min": 500,
+    "max": 50000,
+    "default": null
+  },
+  {
+    "key": "logo",
+    "type": "string",
+    "status": "available",
+    "error": "",
+    "required": true,
+    "array": false,
+    "$createdAt": "2025-10-25T09:38:09.899+00:00",
+    "$updatedAt": "2025-10-25T09:38:10.142+00:00",
+    "size": 50,
+    "default": null,
+    "encrypt": false
+  }
+]

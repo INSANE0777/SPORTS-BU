@@ -1,0 +1,17 @@
+Fetching all users...
+Found 5 users.
+Found 4 active houses.
+Skipping admin user: admin@auction.com
+Deleting old user: keen@sportsbu.com (keen)
+Deleting old user: mighty@sportsbu.com (mighty)
+Deleting old user: super@sportsbu.com (super)
+Deleting old user: heroic@sportsbu.com (heroic)
+Creating user for KEEN KICKERS... Email: keen@sportsbu.com, Password: keenkickers123
+Update prefs for keen with houseId: 68ffa7a4001ae9e266f9
+Creating user for MIGHTY BOLTZ... Email: mighty@sportsbu.com, Password: mightyboltz123
+Update prefs for mighty with houseId: 68ffa94f000e9e21cd92
+Creating user for SUPER SPADES... Email: super@sportsbu.com, Password: superspades123
+Update prefs for super with houseId: 690652a27beff6535c29
+Creating user for HEROIC HEARTS... Email: heroic@sportsbu.com, Password: heroichearts123
+Update prefs for heroic with houseId: 690652a27bf6fa83727f
+Done updating users!
