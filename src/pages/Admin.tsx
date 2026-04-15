@@ -552,11 +552,11 @@ const Admin: React.FC = () => {
                       </Button>
                       <Button 
                         variant="outline" 
-                        onClick={() => handlePlaceBid(house.$id, 250)} 
+                        onClick={() => handlePlaceBid(house.$id, 200)} 
                         disabled={!auctionState.isAuctionActive || isProcessing}
                         className="transition-all duration-300 hover:scale-105 border-2 hover:shadow-depth-1"
                       >
-                        +250
+                        +200
                       </Button>
                       <Button 
                         variant="outline" 
