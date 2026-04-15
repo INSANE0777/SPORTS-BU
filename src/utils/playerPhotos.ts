@@ -31,7 +31,7 @@ const PLAYER_PHOTOS: Record<string, string> = {
 
   // Cricket
   "kaustubh": "/kaustubh.jpg",
-  "shivansh": "/shivansh.JPG",
+  "shivansh": "/shivansh.jpg",
   "Dabeer": "/Dabeer.jpg",
   "anubhav": "/anubhav.jpg",
   "Aditya": "/Aditya.jpg",
