@@ -2,6 +2,7 @@ import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Star, Trophy } from "lucide-react";
 import { normalizePlayerPhoto } from "@/utils/playerPhotos";
+import { sanitizeSport } from "@/utils/textUtils";
 
 interface PlayerDisplayData {
   name: string;
@@ -49,7 +50,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
             <div className="absolute inset-0 bg-yellow-400/10 pointer-events-none z-10"></div>
           )}
           
-          <img src={photoUrl} alt={player.name} className="w-full h-80 py-2 object-contain object-center transition-transform duration-500 hover:scale-[1.03]" />
+          <img src={photoUrl} alt={player.name} className="w-full h-[380px] py-2 object-contain object-center transition-transform duration-500 hover:scale-[1.03]" />
           
           <div className="absolute top-3 right-3 z-10">
             <Badge className={`flex items-center gap-1 text-md backdrop-blur-sm border-none transition-all duration-300 ${
@@ -64,15 +65,15 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player }) => {
         </div>
         
         <div className={`p-4 ${isElitePlayer ? 'bg-yellow-400/5' : ''}`}>
-          <h3 className={`text-3xl font-black transition-colors duration-300 ${isElitePlayer ? 'text-yellow-600' : 'text-foreground'}`}>
+          <h3 className={`text-3xl font-black transition-colors duration-300 ${isElitePlayer ? 'text-yellow-600' : 'text-foreground'} uppercase`}>
             {player.name}
           </h3>
           <p className="text-sm text-muted-foreground/70 font-mono uppercase tracking-wide">
             {player.uniqueId}
           </p>
           <div className="flex items-center gap-2 mt-2">
-            <Badge variant="secondary" className="text-xs">{player.course}</Badge>
-            <Badge variant="outline" className="text-xs">{player.sport}</Badge>
+            <Badge variant="secondary" className="text-xs uppercase">{player.course}</Badge>
+            <Badge variant="outline" className="text-xs uppercase">{sanitizeSport(player.sport)}</Badge>
           </div>
         </div>
       </div>

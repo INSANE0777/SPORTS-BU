@@ -20,10 +20,10 @@ export interface House {
 }
 
 export const houses: House[] = [
-  { id: "h1", name: "KEEN KICKERS", color: "#4ADE80", balance: 50000, logo: "/pic1.png" },
-  { id: "h2", name: "MIGHTY BOLTZ", color: "#A78BFA", balance: 50000, logo: "/pic2.png" },
-  { id: "h3", name: "SUPER SPADES", color: "#22D3EE", balance: 50000, logo: "/pic3.png" },
-  { id: "h4", name: "HEROIC HEARTS", color: "#F87171", balance: 50000, logo: "/pic4.png" },
+  { id: "h1", name: "KEEN KICKERS", color: "#4ADE80", balance: 30000, logo: "/pic1.png" },
+  { id: "h2", name: "MIGHTY BOLTZ", color: "#A78BFA", balance: 30000, logo: "/pic2.png" },
+  { id: "h3", name: "SUPER SPADES", color: "#22D3EE", balance: 30000, logo: "/pic3.png" },
+  { id: "h4", name: "HEROIC HEARTS", color: "#F87171", balance: 30000, logo: "/pic4.png" },
 ];
 
 export const players: Player[] = [

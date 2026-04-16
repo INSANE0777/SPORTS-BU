@@ -74,7 +74,7 @@ module.exports = async ({ req, res, log, error }) => {
       balance: newBalance
     });
 
-    log(`Player ${playerDocument.name} sold to ${house.name} for ₹${price}. New balance: ₹${newBalance}`);
+    log(`Player ${playerDocument.name} sold to ${house.name} for ${price}. New balance: ${newBalance}`);
     return res.json({ success: true, message: 'Player sold and balance deducted successfully.' });
   } catch (e) {
     error(`Error in sold function: ${e.message}`);

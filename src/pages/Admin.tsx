@@ -4,6 +4,7 @@ import { databases, functions } from '@/lib/appwrite';
 import appwriteConfig from '@/config/appwrite';
 import  PlayerCard  from "@/components/PlayerCard";
 import { Button } from "@/components/ui/button";
+import { sanitizeSport } from '@/utils/textUtils';
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +29,7 @@ const Admin: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showPlayerList, setShowPlayerList] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
 
   // Function to schedule elite players evenly distributed throughout the auction
   const schedulePlayers = useMemo(() => {
@@ -220,7 +222,7 @@ const Admin: React.FC = () => {
       winningHouseId: houseId,
       statusMessage: "Bidding"
     });
-    toast.success(`${house.name} bid ₹${newBid.toLocaleString()}`);
+    toast.success(`${house.name} bid ${newBid.toLocaleString()}`);
   };
   
   // SIMPLIFIED: This also ONLY updates the auction state document.
@@ -235,7 +237,7 @@ const Admin: React.FC = () => {
     
     // Check if the bid is higher than current bid
     if (bidAmount <= (auctionState.currentBid ?? 0)) {
-      return toast.error(`Bid must be higher than current bid of ₹${(auctionState.currentBid ?? 0).toLocaleString()}`);
+      return toast.error(`Bid must be higher than current bid of ${(auctionState.currentBid ?? 0).toLocaleString()}`);
     }
     
     // Check against the LIVE balance from the hook
@@ -247,10 +249,12 @@ const Admin: React.FC = () => {
       statusMessage: "Bidding"
     });
     
-    toast.success(`${house.name} bid ₹${bidAmount.toLocaleString()}`);
+    toast.success(`${house.name} bid ${bidAmount.toLocaleString()}`);
     setManualBidAmount(""); // Clear the input
     setSelectedHouseForBid(""); // Clear the selection
   };
+
+
 
   const handleSkipToPlayer = async (playerId: string) => {
     if (isProcessing) return;
@@ -314,30 +318,7 @@ const Admin: React.FC = () => {
       
       toast.success(`${currentPlayer.name} sold to ${winningHouse?.name}!`);
       
-      // Find next player in scheduled order
-      const currentIndex = unsoldPlayers.findIndex(p => p.$id === currentPlayer.$id);
-      const nextPlayer = unsoldPlayers[currentIndex + 1];
-      
-      setTimeout(async () => {
-        if (nextPlayer) {
-          await databases.updateDocument(appwriteConfig.databaseId, appwriteConfig.auctionStateTableId, appwriteConfig.auctionStateDocId, {
-            currentPlayerId: nextPlayer.$id,
-            currentBid: nextPlayer.basePrice,
-            winningHouseId: "",
-            statusMessage: "Next Player",
-          });
-        } else {
-          // Get any player ID as a placeholder since we can't use null
-          const anyPlayerId = players[0]?.$id || "";
-          await databases.updateDocument(appwriteConfig.databaseId, appwriteConfig.auctionStateTableId, appwriteConfig.auctionStateDocId, { 
-            statusMessage: "Complete",
-            currentPlayerId: anyPlayerId,
-            currentBid: 0,
-            isAuctionActive: false,
-          });
-          toast.info("All players have been sold!");
-        }
-      }, 2500);
+
     } catch (error: unknown) {
       console.error("Failed to sell player:", error);
       if (error instanceof AppwriteException) { 
@@ -461,22 +442,30 @@ const Admin: React.FC = () => {
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <h4 className="font-bold text-lg">{player.name}</h4>
+                              <h4 className="font-bold text-lg uppercase">{player.name}</h4>
                               {player.rating >= 9 && (
-                                <Badge className="bg-yellow-500 text-black">
+                                <Badge className="bg-yellow-500 text-black font-black">
                                   <Star className="w-3 h-3 mr-1 fill-black" />
                                   ELITE
                                 </Badge>
                               )}
                             </div>
-                            <p className="text-sm text-muted-foreground font-mono">{player.uniqueId}</p>
+                            <p className="text-sm text-muted-foreground font-mono uppercase">{player.uniqueId}</p>
                             <div className="flex items-center gap-2 mt-2">
-                              <Badge variant="secondary" className="text-xs">{player.sport}</Badge>
-                              <Badge variant="outline" className="text-xs">₹{player.basePrice.toLocaleString()}</Badge>
+                              <Badge variant="secondary" className="text-xs uppercase">{sanitizeSport(player.sport)}</Badge>
+                              <Badge variant="outline" className="text-xs uppercase">{player.basePrice.toLocaleString()}</Badge>
                             </div>
                           </div>
-                          <div className="text-right">
+                          <div className="text-right flex flex-col items-end gap-2">
                             <p className="text-xs text-muted-foreground font-semibold">#{index + 1}</p>
+                            <Button 
+                              size="sm" 
+                              variant="secondary"
+                              className="text-[10px] h-7 px-2 uppercase font-bold"
+                              onClick={() => handleSkipToPlayer(player.$id)}
+                            >
+                              Set Player
+                            </Button>
                           </div>
                         </div>
                       </Card>
@@ -531,8 +520,8 @@ const Admin: React.FC = () => {
                           )}
                         </div>
                         <div>
-                          <h3 className="font-bold text-foreground text-lg leading-tight">{house.name}</h3>
-                          <p className="text-sm text-muted-foreground font-mono">₹{house.balance.toLocaleString()}</p>
+                          <h3 className="font-bold text-foreground text-lg leading-tight uppercase">{house.name}</h3>
+                          <p className="text-sm text-muted-foreground font-mono">{house.balance.toLocaleString()}</p>
                         </div>
                       </div>
                       {auctionState.winningHouseId === house.$id && (
@@ -572,7 +561,7 @@ const Admin: React.FC = () => {
               </div>
             </div>
             <Card className="p-6 bg-paper rounded-2xl shadow-depth-2 border border-border/50 hover:shadow-depth-3 transition-all duration-300">
-              <h3 className="text-2xl font-bold text-foreground mb-2">Manual Bid Entry</h3>
+              <h3 className="text-2xl font-black text-foreground mb-2 uppercase">Manual Bid Entry</h3>
               <p className="text-sm text-muted-foreground mb-6 font-medium">For custom amounts.</p>
               <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_auto] gap-3 items-center">
                 <select value={selectedHouseForBid} onChange={(e) => setSelectedHouseForBid(e.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
@@ -586,6 +575,7 @@ const Admin: React.FC = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

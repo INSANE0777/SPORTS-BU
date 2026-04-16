@@ -18,15 +18,15 @@ export function Footer({ className, ...props }) {
             <SocialCard title="Facebook" href="#" />
             <LinksGroup title="About Us" links={[{ title: 'Pricing', href: '#' }, { title: 'Testimonials', href: '#' }, { title: 'FAQs', href: '#' }, { title: 'Contact Us', href: '#' }, { title: 'Blog', href: '#' }]} />
           </div>
-          <div className="footer-col" style={{'--delay': '0.1s'}}>
+          <div className="footer-col" style={{'--delay': '0.1s'} as React.CSSProperties}>
             <SocialCard title="Youtube" href="#" />
             <LinksGroup title="Support" links={[{ title: 'Help Center', href: '#' }, { title: 'Terms', href: '#' }, { title: 'Privacy', href: '#' }, { title: 'Security', href: '#' }, { title: 'Cookie Policy', href: '#' }]} />
           </div>
-          <div className="footer-col" style={{'--delay': '0.2s'}}>
+          <div className="footer-col" style={{'--delay': '0.2s'} as React.CSSProperties}>
             <SocialCard title="Twitter" href="#" />
             <LinksGroup title="Community" links={[{ title: 'Forum', href: '#' }, { title: 'Events', href: '#' }, { title: 'Partners', href: '#' }, { title: 'Affiliates', href: '#' }, { title: 'Career', href: '#' }]} />
           </div>
-          <div className="footer-col" style={{'--delay': '0.3s'}}>
+          <div className="footer-col" style={{'--delay': '0.3s'} as React.CSSProperties}>
             <SocialCard title="Instagram" href="#" />
             <LinksGroup title="Legal" links={[{ title: 'Investors', href: '#' }, { title: 'Terms of Use', href: '#' }, { title: 'Privacy Policy', href: '#' }, { title: 'Cookie Policy', href: '#' }]} />
           </div>
@@ -34,7 +34,7 @@ export function Footer({ className, ...props }) {
       </div>
       <div className="flex justify-center border-t border-paper/10 p-3">
         <p className="text-paper/60 text-xs">
-          © {new Date().getFullYear()} Sports Auction. All rights reserved.
+          © {new Date().getFullYear()} SPORTS AUCTION. ALL RIGHTS RESERVED.
         </p>
       </div>
     </footer>
@@ -51,7 +51,7 @@ function LinksGroup({ title, links }) {
         {links.map((link) => (
           <li key={link.title} className="mb-2">
             <a href={link.href} className="text-paper/60 hover:text-paper text-sm transition-all duration-200 hover:-translate-y-px">
-              {link.title}
+              {link.title.toUpperCase()}
             </a>
           </li>
         ))}
@@ -63,7 +63,7 @@ function LinksGroup({ title, links }) {
 function SocialCard({ title, href }) {
   return (
     <a href={href} className="group text-paper hover:bg-paper/5 flex items-center justify-between border-b border-paper/10 p-4 text-sm transition-colors duration-200 md:border-t-0">
-      <span className="font-semibold">{title}</span>
+      <span className="font-semibold uppercase tracking-wider">{title}</span>
       <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
     </a>
   );

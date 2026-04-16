@@ -8,7 +8,7 @@ const config = {
 };
 
 async function checkFull() {
-  const url = `${config.endpoint}/databases/${config.databaseId}/collections/${config.housesTableId}/documents`;
+  const url = `${config.endpoint}/databases/${config.databaseId}/collections/players/documents`;
   
   const response = await fetch(url, {
     headers: {

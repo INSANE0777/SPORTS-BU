@@ -27,15 +27,20 @@ async function resetAuction() {
     let allPlayers = [];
     let offset = 0;
     while(true) {
-        const queryLimit = encodeURIComponent('limit(100)');
-        const queryOffset = encodeURIComponent(`offset(${offset})`);
-        const url = `${ENDPOINT}/databases/${DB_ID}/collections/${PLAYERS_ID}/documents?queries[]=${queryLimit}&queries[]=${queryOffset}`;
+        const url = `${ENDPOINT}/databases/${DB_ID}/collections/${PLAYERS_ID}/documents?queries[]=${encodeURIComponent('limit(100)')}&queries[]=${encodeURIComponent(`offset(${offset})`)}`;
         const res = await fetch(url, { headers });
         const data = await res.json();
+        
+        if (!res.ok) {
+          console.error("Error fetching players:", data);
+          break;
+        }
+
         const batch = data.documents || [];
         if(batch.length === 0) break;
         allPlayers = allPlayers.concat(batch);
         offset += batch.length;
+        console.log(`Fetched ${allPlayers.length} players so far...`);
     }
     const players = allPlayers;
     console.log(`Fetched ${players.length} total players.`);
@@ -79,7 +84,7 @@ async function resetAuction() {
         const updateRes = await fetch(`${ENDPOINT}/databases/${DB_ID}/collections/${HOUSES_ID}/documents/${house.$id}`, {
             method: 'PATCH',
             headers,
-            body: JSON.stringify({ data: { balance: 100000000 } })
+            body: JSON.stringify({ data: { balance: 30000 } })
         });
     }
 

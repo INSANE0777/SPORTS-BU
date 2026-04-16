@@ -37,26 +37,26 @@ const Landing = () => {
               <div className="z-10">
                 <h1 className="hero-element text-6xl md:text-8xl font-black text-foreground mb-6 leading-tight">
                   The Arena of
-                  <span className="block text-gradient-primary">Digital Sport</span>
+                  <span className="block text-gradient-primary uppercase">Digital Sport</span>
                 </h1>
-                <p className="hero-element text-xl md:text-2L text-muted-foreground mb-10 max-w-lg">
+                <p className="hero-element text-xl md:text-2L text-muted-foreground mb-10 max-w-lg uppercase tracking-tight">
                   Where strategy meets spectacle. Witness elite houses clash in a real-time battle for the ultimate athletic talent.
                 </p>
                 <div className="hero-element flex flex-col sm:flex-row gap-4">
                   <Link to="/login">
                     <Button size="lg" className="w-full sm:w-auto group relative gradient-primary text-lg px-8 py-6 text-primary-foreground transition-shadow duration-300 hover:shadow-strong">
-                      Launch as Admin
+                      LAUNCH AS ADMIN
                       <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
                   </Link>
                   <Link to="/login">
                     <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg px-8 py-6 hover:bg-foreground hover:text-background transition-colors duration-300">
-                      Enter as House
+                      ENTER AS HOUSE
                     </Button>
                   </Link>
                   <Link to="/broadcast">
                     <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg px-8 py-6 hover:bg-foreground hover:text-background transition-colors duration-300">
-                      Watch Broadcast
+                      WATCH BROADCAST
                     </Button>
                   </Link>
                 </div>
@@ -74,8 +74,8 @@ const Landing = () => {
           <section className="houses-section py-24 px-6 bg-paper relative z-20">
             <div className="container mx-auto">
               <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4 house-card">The Elite Houses</h2>
-                <p className="text-muted-foreground text-xl max-w-2xl mx-auto house-card">Four legendary factions competing for dominance in the ultimate sports arena.</p>
+                <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4 house-card uppercase">The Elite Houses</h2>
+                <p className="text-muted-foreground text-xl max-w-2xl mx-auto house-card uppercase tracking-tight">Four legendary factions competing for dominance in the ultimate sports arena.</p>
               </div>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

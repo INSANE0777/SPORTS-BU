@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Wallet, Star, PartyPopper } from "lucide-react";
 import { HouseDocument } from "@/types/appwrite";
 import { normalizePlayerPhoto } from "@/utils/playerPhotos";
+import { sanitizeSport } from "@/utils/textUtils";
 
 const HouseView: React.FC = () => {
   const { houseId } = useParams<{ houseId: string }>();
@@ -91,12 +92,12 @@ const HouseView: React.FC = () => {
                   {house.logo ? (
                     <img src={house.logo} alt={house.name} className="w-full h-full object-contain p-1 drop-shadow-xl" />
                   ) : (
-                    <span className="text-4xl font-bold" style={{ color: house.color }}>{house.name.charAt(0)}</span>
+                    <span className="text-4xl font-bold uppercase" style={{ color: house.color }}>{house.name.charAt(0)}</span>
                   )}
                 </div>
-              <h1 className="text-5xl md:text-6xl font-black text-foreground tracking-tight">{house.name}</h1>
+              <h1 className="text-5xl md:text-6xl font-black text-foreground tracking-tight uppercase">{house.name}</h1>
             </div>
-            <p className="text-lg text-muted-foreground mt-2 font-medium">Live Auction View</p>
+            <p className="text-lg text-muted-foreground mt-2 font-medium uppercase">Live Auction View</p>
           </div>
           <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 h-20 w-auto bg-ink rounded-2xl p-3 items-center justify-center shadow-depth-2 hover-lift-advanced transition-all duration-300">
             <img src="/SPORTS.png" alt="Sports Committee Logo" className="h-full w-auto" />
@@ -123,12 +124,12 @@ const HouseView: React.FC = () => {
                       key={auctionState.currentBid}
                       className="text-5xl font-black text-primary number-pop transition-all duration-300"
                     >
-                      ₹{(auctionState.currentBid ?? 0).toLocaleString()}
+                      {(auctionState.currentBid ?? 0).toLocaleString()}
                     </p>
                   </div>
                   <div className="p-5 bg-background rounded-2xl shadow-depth-1 hover:shadow-depth-2 transition-all duration-300 border border-border/30">
                     <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Leading House</p>
-                    <p className="text-2xl font-bold text-foreground">{winningHouse?.name || 'No Bids Yet'}</p>
+                    <p className="text-2xl font-bold text-foreground uppercase">{winningHouse?.name || 'No Bids Yet'}</p>
                   </div>
                   {winningHouse?.$id === house.$id && (
                     <div className="p-5 rounded-2xl bg-primary text-primary-foreground shadow-depth-3 animate-bounce-in border-2 border-primary/20">
@@ -146,8 +147,8 @@ const HouseView: React.FC = () => {
               <Card className="p-5 bg-paper rounded-2xl shadow-depth-3 ring-4 ring-primary/30 border-2 border-primary animate-scale-in">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-bold text-foreground text-lg mb-1">{house.name} (You)</h3>
-                    <p className="text-3xl font-black text-foreground font-mono tracking-tight">₹{house.balance.toLocaleString()}</p>
+                    <h3 className="font-bold text-foreground text-lg mb-1 uppercase">{house.name} (You)</h3>
+                    <p className="text-3xl font-black text-foreground font-mono tracking-tight">{house.balance.toLocaleString()}</p>
                   </div>
                   <Wallet className="w-10 h-10 text-primary animate-float" />
                 </div>
@@ -168,8 +169,8 @@ const HouseView: React.FC = () => {
                         )}
                       </div>
                       <div>
-                        <h3 className="font-semibold text-foreground text-sm leading-tight">{h.name}</h3>
-                        <p className="text-xs text-muted-foreground font-mono">₹{h.balance.toLocaleString()}</p>
+                        <h3 className="font-semibold text-foreground text-sm leading-tight uppercase">{h.name}</h3>
+                        <p className="text-xs text-muted-foreground font-mono">{h.balance.toLocaleString()}</p>
                       </div>
                     </div>
                     {winningHouse?.$id === h.$id && (
@@ -193,8 +194,8 @@ const HouseView: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <img src={normalizePlayerPhoto(player.name, player.photo)} alt={player.name} className="w-12 h-12 rounded-xl object-cover shadow-depth-1 transition-transform duration-300 hover:scale-110"/>
                         <div>
-                          <h4 className="font-bold text-foreground text-sm leading-tight">{player.name}</h4>
-                          <p className="text-xs text-muted-foreground">{player.sport}</p>
+                          <h4 className="font-bold text-foreground text-sm leading-tight uppercase">{player.name}</h4>
+                          <p className="text-xs text-muted-foreground uppercase">{sanitizeSport(player.sport)}</p>
                         </div>
                       </div>
                       <Badge variant="outline" className="flex items-center gap-1 text-sm border-2 font-semibold">
@@ -246,11 +247,11 @@ const HouseView: React.FC = () => {
                   <div className="grid grid-cols-2 gap-3 mb-3">
                     <div className="bg-background rounded-xl p-2.5 text-center shadow-inner">
                       <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Price</p>
-                      <p className="font-black text-primary text-sm">₹{(player.sellingPrice || 0).toLocaleString()}</p>
+                      <p className="font-black text-primary text-sm">{(player.sellingPrice || 0).toLocaleString()}</p>
                     </div>
                     <div className="bg-background rounded-xl p-2.5 text-center shadow-inner">
                       <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mb-1">Sport</p>
-                      <p className="font-bold text-foreground text-sm truncate">{player.sport}</p>
+                      <p className="font-bold text-foreground text-sm truncate uppercase">{sanitizeSport(player.sport)}</p>
                     </div>
                   </div>
                   <div className="flex justify-between items-center text-xs font-bold text-muted-foreground px-1">

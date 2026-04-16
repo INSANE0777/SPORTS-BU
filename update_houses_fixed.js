@@ -9,28 +9,28 @@ const newHouses = [
     $id: "68ffa7a4001ae9e266f9",
     name: "KEEN KICKERS",
     color: "#4ADE80",
-    balance: 50000,
+    balance: 30000,
     logo: "/pic1.png"
   },
   {
     $id: "68ffa94f000e9e21cd92",
     name: "MIGHTY BOLTZ",
     color: "#A78BFA",
-    balance: 50000,
+    balance: 30000,
     logo: "/pic2.png"
   },
   {
     $id: "690652a27beff6535c29",
     name: "SUPER SPADES",
     color: "#22D3EE",
-    balance: 50000,
+    balance: 30000,
     logo: "/pic3.png"
   },
   {
     $id: "690652a27bf6fa83727f",
     name: "HEROIC HEARTS",
     color: "#F87171",
-    balance: 50000,
+    balance: 30000,
     logo: "/pic4.png"
   }
 ];
