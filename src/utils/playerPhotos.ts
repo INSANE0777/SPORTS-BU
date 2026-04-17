@@ -24,7 +24,7 @@ const PLAYER_PHOTOS: Record<string, string> = {
 "Pragya Saraswat": "/Pragya Saraswat.jpeg",
 "Kanan Sehrawat": "/Kanan Sehrawat.jpeg", // FIXED spelling
 "Vanshika Dhaka": "/Vanshika Dhaka.jpeg",
-"Meenal Singh": "/Meenal Singh.jpeg", // FIXED full name
+"Meenal Singh": "/Meenal.jpeg", // FIXED full name
   
   // Chess
   "Harshit Singh Chauhan": "/Harshit Singh Chauhan.jpg",
